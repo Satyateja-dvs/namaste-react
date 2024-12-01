@@ -1,0 +1,1 @@
+{"mappings":"AAAA,iDAAiD;AACjD,MAAM,UAAU,MAAM,aAAa,CAAC,MAAM,CAAE,GAAG;AAE/C,QAAQ,GAAG,CAAC","sources":["App.js"],"sourcesContent":["// import { createRoot } from 'react-dom/client';\nconst element = React.createElement('h1', { }, 'Hello, world!');\n\nconsole.log(element);"],"names":[],"version":3,"file":"index.6bd02f5a.js.map","sourceRoot":"/__parcel_source_root/"}
