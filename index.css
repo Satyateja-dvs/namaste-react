@@ -22,11 +22,19 @@
 .nav-items > ul {
   display: flex;
   list-style: none;
+  align-items: center;
 }
 
 .nav-items > ul > li {
   margin-right: 20px;
   padding: 0 16px
+}
+
+.header-cart-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 0;
 }
 .search-container {
   display: flex;
@@ -46,27 +54,28 @@
   
 }
 .restaurant-card-container {
-  width: auto;
+  /* width: auto; */
   margin: 8px;
+  width: 19.5rem;
+  height: auto;
 } 
 .restaurant-card-container:hover {
   transform: scale(0.95, 0.95);
   transition: 0.1s ease-in;
 }
 .image-container {
-  width: 400px;
-  height: 200px;
+  /* width: 400px;
+  height: 200px; */
   overflow: hidden;
   border-radius: 6px;
+  height: 13rem;
 }
 
 .image-container > img {
   width: 100%;
-  height: 100%;
+  height: inherit;
   object-fit: cover;
 }
-
-
 
 .search-button {
   padding: 12px 32px;
@@ -74,12 +83,17 @@
   background: #B8341B;
   color: white;
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
 }
-
-
-/* .restro-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-} */
+.rating-and-sla-container {
+  display: flex;
+  justify-content: space-between;
+}
+.rating {
+  display: flex;
+  align-items: center;
+}
+.sla {
+  font-weight: bold;
+  margin-right: 8px;
+}

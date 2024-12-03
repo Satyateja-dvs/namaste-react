@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import TopRestaurantCards from './components/TopRestaurantCards';
+import restObj from './components/SwiggyRestaurantData';
+
 // Food App Steps
 // 1. Header
   // Logo
@@ -31,12 +33,7 @@ const Body = () => {
       </div>
       <div className="top-restaurants padding margin-bottom">
         <h2>Top restaurant chains near you</h2>
-        <div className="restaurant-container">
-          <TopRestaurantCards />
-          <TopRestaurantCards />
-          <TopRestaurantCards />
-          <TopRestaurantCards />
-        </div>
+        <TopRestaurantCards resData={restObj}/>
       </div>
     </div>
   )

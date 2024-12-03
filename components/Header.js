@@ -1,5 +1,6 @@
 import React from 'react';
-import MyImage from '../images/app-logo.png';
+import MyImage from '../assets/app-logo.png';
+import CartIcon from '../assets/cart.svg';
 
 const Header = () => {
   return (
@@ -13,7 +14,10 @@ const Header = () => {
           <li>Home</li>
           <li>About</li>
           <li>Partner with Us</li>
-          <li>Cart</li>
+          <li className="header-cart-container">
+            <img src={CartIcon} alt="Cart Icon" />
+            <span>Cart</span>
+          </li>
         </ul>
       </div>
     </div>
