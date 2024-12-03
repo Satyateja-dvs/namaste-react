@@ -1,0 +1,85 @@
+/* common classes */
+.padding {
+  padding: 32px;
+}
+.margin-bottom {
+  margin-bottom: 2rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #F4F4F4
+}
+.logo-container {
+  .logo {
+    width: 110px;
+  }
+}
+
+.nav-items {
+  margin: auto 0;
+}
+.nav-items > ul {
+  display: flex;
+  list-style: none;
+}
+
+.nav-items > ul > li {
+  margin-right: 20px;
+  padding: 0 16px
+}
+.search-container {
+  display: flex;
+  margin: 0 16px;
+}
+.search-container > input {
+  width: -webkit-fill-available;
+  border-radius: 6px;
+  border-width: 1px;
+  padding: 12px;
+}
+
+.restaurant-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+}
+.restaurant-card-container {
+  width: auto;
+  margin: 8px;
+} 
+.restaurant-card-container:hover {
+  transform: scale(0.95, 0.95);
+  transition: 0.1s ease-in;
+}
+.image-container {
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.image-container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.search-button {
+  padding: 12px 32px;
+  margin-left: 8px;
+  background: #B8341B;
+  color: white;
+  border: none;
+  border-radius: 2px;
+}
+
+
+/* .restro-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+} */

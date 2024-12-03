@@ -1,34 +1,54 @@
 // import { createRoot } from 'react-dom/client';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
+import Header from './components/Header';
+import TopRestaurantCards from './components/TopRestaurantCards';
+// Food App Steps
+// 1. Header
+  // Logo
+  // Navigation Items
+// 2.  Body
+  // Search Bar
+  // Components (Restaurant Cards)
+  // Read more button
+// 3. Footer
+  // Company Logo
+  // Copy Rights
+  // Company
+  // Contact Us
+  // Available in
+  // Careers
+  // Social Media Lins
 
-const element = React.createElement('h1', { style: { color: "red" } }, 'Hello, world');
-console.log(element);
 
-const JSXElement = (
-  <>
-    <h1>JSX Element</h1>
-    <p>Test</p>
-  </>
-)
 
-const HomePage = () => {
-  const [data, setData] = React.useState('');
-
-  const validateData = () => {
-    setData("Data is valid");
-  }
-
+const Body = () => {
   return (
-    <div>
-      <input placeholder='Input Your Name'/>
-      <button onClick={validateData}>Submit</button>
-      <div className='hello'>
-        {data}
+    <div className="container margin-bottom">
+      <div className="search-container margin-bottom">
+        <input type="text" placeholder="Search for your favourite food" />
+        <button className="search-button">Search</button>
       </div>
+      <div className="top-restaurants padding margin-bottom">
+        <h2>Top restaurant chains near you</h2>
+        <div className="restaurant-container">
+          <TopRestaurantCards />
+          <TopRestaurantCards />
+          <TopRestaurantCards />
+          <TopRestaurantCards />
+        </div>
+      </div>
+    </div>
+  )
+}
+const AppLayout = () => {
+  return (
+    <div className="app-container">
+      <Header />
+      <Body />
     </div>
   )
 }
 
 const root = document.getElementById('root');
-ReactDOM.render(<HomePage />, root);
+ReactDOM.createRoot(root).render(<AppLayout />);
