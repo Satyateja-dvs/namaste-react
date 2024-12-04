@@ -36,6 +36,9 @@
   gap: 4px;
   padding-left: 0;
 }
+.search-box-and-results {
+  position: relative;
+}
 .search-container {
   display: flex;
   margin: 0 16px;
@@ -45,6 +48,13 @@
   border-radius: 6px;
   border-width: 1px;
   padding: 12px;
+}
+.search-result-container {
+  position: absolute;
+  z-index: 2;
+  background: rgb(243, 242, 242);
+  width: 100%;
+  padding: 16px;
 }
 
 .restaurant-container {
@@ -62,13 +72,13 @@
 .restaurant-card-container:hover {
   transform: scale(0.95, 0.95);
   transition: 0.1s ease-in;
+  cursor: pointer;
 }
 .image-container {
-  /* width: 400px;
-  height: 200px; */
   overflow: hidden;
   border-radius: 6px;
   height: 13rem;
+  position: relative;
 }
 
 .image-container > img {
@@ -76,7 +86,14 @@
   height: inherit;
   object-fit: cover;
 }
-
+.discount-overlay {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  background: linear-gradient(rgba(27, 30, 36, 0) 0%, rgb(27, 30, 36) 84.21%);
+  padding: 8px 0 8px 8px;
+  font-weight: bold;
+}
 .search-button {
   padding: 12px 32px;
   margin-left: 8px;
@@ -88,6 +105,7 @@
 .rating-and-sla-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 6px;
 }
 .rating {
   display: flex;
@@ -96,4 +114,8 @@
 .sla {
   font-weight: bold;
   margin-right: 8px;
+}
+
+.restro-cuisines {
+  margin-bottom: 6px;
 }
