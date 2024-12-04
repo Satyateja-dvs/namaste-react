@@ -35,7 +35,7 @@ const Body = () => {
       setRestFilteredData([]);
     }
   }
-  console.log("filteredData-->", restFilteredData)
+
   return (
     <div className="container margin-bottom">
       <div className="search-box-and-results">
