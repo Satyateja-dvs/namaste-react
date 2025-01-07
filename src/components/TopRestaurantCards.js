@@ -1,4 +1,6 @@
-import StarRating from '../assets/star-rating.svg';
+import StarRating from '../../assets/star-rating.svg';
+import { RESTRO_IMAGE_BASE_URL } from '../utils/constants';
+
 const TopRestaurantCards = (props) => {
   const {resData} = props;
 
@@ -19,7 +21,7 @@ const TopRestaurantCards = (props) => {
         return (
           <div className="restaurant-card-container" key={id}>
             <div className="image-container">
-              <img src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`} alt="Restaurant Image" className="restro-image"/>
+              <img src={`${RESTRO_IMAGE_BASE_URL}/${cloudinaryImageId}`} alt="Restaurant Image" className="restro-image"/>
               <div className="discount-overlay">
                 <span>{aggregatedDiscountInfoV3?.header} {aggregatedDiscountInfoV3?.subHeader}</span>
               </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import MyImage from '../assets/app-logo.png';
-import CartIcon from '../assets/cart.svg';
+import MyImage from '../../assets/app-logo.png';
+import CartIcon from '../../assets/cart.svg';
 
 const Header = () => {
   return (
