@@ -123,3 +123,17 @@
 .restro-cuisines {
   margin-bottom: 6px;
 }
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  width: 16.5rem;
+  height: 20rem;
+  margin: 8px;
+  background: #f4f4f4;
+  border-radius: 6px;
+  animation: shimmer 2s infinite;
+}

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import TopRestaurantCards from './components/TopRestaurantCards';
 import restObj from './utils/mockData';
+import Shimmer from './components/Shimmer';
 
 // Food App Steps
 // 1. Header
@@ -26,15 +27,16 @@ import restObj from './utils/mockData';
 
 const Body = () => {
   const [restFilteredData, setRestFilteredData] = React.useState([]);
+  console.log("restFilteredData", restFilteredData)
   const onInputChange = async (e) => {
-    const inputData = e.target.value;
-    if (inputData && inputData.length > 0) {
+    // const inputData = e.target.value;
+    // if (inputData && inputData.length > 0) {
       
-      const filteredData = restObj.filter((item) => item.info.name.toLowerCase().includes(inputData.toLowerCase()) || item.info.cuisines.join(", ").toLowerCase().includes(inputData.toLowerCase()));
-      setRestFilteredData(filteredData);
-    } else {
-      setRestFilteredData([]);
-    }
+    //   const filteredData = restObj.filter((item) => item.info.name.toLowerCase().includes(inputData.toLowerCase()) || item.info.cuisines.join(", ").toLowerCase().includes(inputData.toLowerCase()));
+    //   setRestFilteredData(filteredData);
+    // } else {
+    //   setRestFilteredData([]);
+    // }
   }
 
   useEffect( () => {
@@ -44,7 +46,7 @@ const Body = () => {
   const getAPIResponse = async () => {
     const api_response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=15.502005&lng=80.0031833&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
     const data = await api_response.json();
-    console.log("data", data);
+    setRestFilteredData(data.data);
   }
 
   return (
@@ -54,16 +56,16 @@ const Body = () => {
           <input type="text" placeholder="Search for your favourite food" onChange={onInputChange}/>
           <button className="search-button">Search</button>
         </div>
-        {restFilteredData.length > 0 && 
+        {/* {restFilteredData.data.length > 0 && 
           <div className="search-result-container">
             <h2>Search results</h2>
             <TopRestaurantCards resData={restFilteredData} />
           </div>
-        }
+        } */}
       </div>
       <div className="top-restaurants padding margin-bottom">
         <h2>Top restaurant chains near you</h2>
-        <TopRestaurantCards resData={restObj}/>
+        {restFilteredData?.cards?.length > 0 ? <TopRestaurantCards resData={restFilteredData} /> : <Shimmer />}
       </div>
     </div>
   )
