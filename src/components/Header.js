@@ -1,6 +1,7 @@
 import React from 'react';
 import MyImage from '../../assets/app-logo.png';
 import CartIcon from '../../assets/cart.svg';
+import { NavLink } from 'react-router';
 
 const Header = () => {
   return (
@@ -10,15 +11,15 @@ const Header = () => {
         <img className="logo" src={MyImage} alt="Food App Logo" />
       </div>
       <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Partner with Us</li>
-          <li className="header-cart-container">
+        <nav className='nav-list'>
+          <NavLink to="/"> Home </NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/partner-with-us"> PartnerWithUs</NavLink>
+          <NavLink to="/cart" className="cart-link">
             <img src={CartIcon} alt="Cart Icon" />
-            <span>Cart</span>
-          </li>
-        </ul>
+            Cart
+          </NavLink>
+        </nav>
       </div>
     </div>
   )

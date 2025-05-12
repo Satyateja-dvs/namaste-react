@@ -137,3 +137,19 @@
   border-radius: 6px;
   animation: shimmer 2s infinite;
 }
+
+.nav-list {
+  a {
+    margin: auto 16px;
+    color: black;
+    text-decoration: none;
+  }
+
+  .cart-link {
+    display: inline-flex;
+    align-items: end;
+  }
+  .active {
+    color: #B8341B;
+  }
+}

@@ -4,3 +4,5 @@ export const CONTENT_TYPE_ENUM = {
     "BASIC_CONTENT": "type.googleapis.com/swiggy.seo.widgets.v1.BasicContent",
     "FAVOURITE_RESTAURANTS": "type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle",
 }
+
+export const RESTRO_DETAIL_PAGE_URL = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=15.502005&lng=80.0031833"
