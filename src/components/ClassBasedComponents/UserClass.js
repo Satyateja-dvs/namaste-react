@@ -7,11 +7,12 @@ class UserClass extends React.Component {
     console.log("this.props from parent", this);
   }
   render() {
+    const {name, prof, functionType} = this.props;
     return (
       <div className="user-card">
-        Name: {this.props.name}
-        <br />{this.props.prof}
-        <br /> {this.props.functionType}
+        Name: {name}
+        <br />{prof}
+        <br /> {functionType}
         <br />
         <CompanyProfileClass companyName={"Trika Technologies"}/>
       </div>
