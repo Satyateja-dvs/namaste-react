@@ -11,24 +11,7 @@ import About from './components/About';
 import PartnerWithUs from './components/PartnerWithUs';
 import ErrorBoundary from './components/ErrorBoundary';
 import RestroDetailPage from './components/RestroDetailPage';
-// Food App Steps
-// 1. Header
-// Logo
-// Navigation Items
-// 2. Body
-// Search Bar
-// Components (Restaurant Cards)
-// Read more button
-// 3. Footer
-// Company Logo
-// Copy Rights
-// Company
-// Contact Us
-// Available in
-// Careers
-// Social Media Lins
-
-
+import Career from './components/Career';
 
 const Body = () => {
   const [restFilteredData, setRestFilteredData] = React.useState([]);
@@ -111,6 +94,7 @@ const browserRouter = (
       <Route element={<AppLayout />}>
         <Route path="/" element={<Body />} />
         <Route path="/about" element={<About />} errorElement= {<ErrorBoundary />} />
+        <Route path="/careers" element={<Career />} errorElement= {<ErrorBoundary />} /> 
         <Route path="/partner-with-us" element={<PartnerWithUs />} errorElement= {<ErrorBoundary />} />
         <Route path="/restaurants/:id" element={<RestroDetailPage />} errorElement= {<ErrorBoundary />} />
       </Route>

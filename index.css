@@ -153,3 +153,9 @@
     color: #B8341B;
   }
 }
+
+.user-card {
+  padding: 4px;
+  border: 1px solid black;
+  width: 25%;
+}
