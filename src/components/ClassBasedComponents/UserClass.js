@@ -4,12 +4,22 @@ import CompanyProfileClass from './CompanyProfileClass';
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
-    console.log("this.props from parent", this);
+    this.state = {
+      count: 0
+    }
   }
   render() {
     const {name, prof, functionType} = this.props;
+    const {count} = this.state;
     return (
       <div className="user-card">
+        <button onClick={() => {
+          this.setState((prevState) => this.setState({count: prevState.count + 1}));
+        }}>
+          Click Me
+        </button>
+        {count}
+        <br />
         Name: {name}
         <br />{prof}
         <br /> {functionType}
