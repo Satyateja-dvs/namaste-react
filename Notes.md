@@ -34,7 +34,7 @@ Occurs when a component is created and inserted into the DOM.
 - `constructor()`: Initializes the component's state and binds methods.
 - `static getDerivedStateFromProps()`: Updates state based on changes in props.
 - `render()`: Returns the JSX to be rendered.
-- `componentDidMount()`: Called after the component is rendered; often used for fetching data or setting up subscriptions.
+- `componentDidMount()`: Called after the component is rendered; often used for fetching data by calling API's or setting up subscriptions.
 
 ### Updating
 Occurs when a component's state or props change, leading to re-rendering.
@@ -52,3 +52,20 @@ Occurs when a component is removed from the DOM.
 
 ### Error Handling
 - `componentDidCatch()`: Called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component. Used for logging errors and displaying fallback UI.
+
+### React Lifecycle Diagram
+![alt text](images/react-lifecycle-diagram.png)
+
+### Render Phase vs Commit Phase
+
+**Render Phase:**
+- This is when React calls the lifecycle methods and renders the JSX to create a virtual DOM.
+- It is a "pure" phase: no side effects should occur here.
+- Methods called: `constructor`, `getDerivedStateFromProps`, `render`, and `shouldComponentUpdate`.
+- Can be paused, aborted, or restarted by React.
+
+**Commit Phase:**
+- This is when React applies changes to the actual DOM.
+- Side effects are allowed here.
+- Methods called: `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, and `getSnapshotBeforeUpdate`.
+- This phase cannot be interrupted.
