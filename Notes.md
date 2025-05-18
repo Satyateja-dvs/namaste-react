@@ -53,6 +53,8 @@ Occurs when a component is removed from the DOM.
 ### Error Handling
 - `componentDidCatch()`: Called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component. Used for logging errors and displaying fallback UI.
 
+---
+
 ## 6. React Lifecycle Diagram
 ![alt text](assets/images/react-lifecycle-diagram.png)
 
@@ -70,6 +72,8 @@ Occurs when a component is removed from the DOM.
 - Methods called: `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, and `getSnapshotBeforeUpdate`.
 - This phase cannot be interrupted.
 
+---
+
 ## 7. Code Example
 
 ```jsx
@@ -79,6 +83,9 @@ class User extends React.Component {
     constructor(props) {
         super(props);
         console.log("User Constructor Method Called");
+        // 1. It calls the contructer and
+        // 2. It renders the dummy data on the DOM by rendering HTML.
+        // 3. Then, the componentDidMount will be called.
     }
 
     componentDidMount() {
@@ -86,7 +93,7 @@ class User extends React.Component {
         // 1. This method is used to call APIs.
         // 2. Once the data is received from the API, update the content using this.setState.
         // 3. This triggers a re-render of the component with the new data.
-        // 4. Then, componentDidUpdate is called.
+        // 4. Then, componentDidUpdate will be called.
     }
 
     componentDidUpdate() {
@@ -127,4 +134,73 @@ User componentDidUpdate is Called
 When the component unmounts:
 ```
 User componentWillUnmount is Called
+```
+
+---
+
+## 8. Explanation of `componentWillUnmount` in Class-Based Components
+
+If we define a `setInterval` inside `componentDidMount` in a class-based component, it will continuously call `console.log` even after navigating away from the component. This happens because the interval is not cleared when the component unmounts in a Single Page Application (SPA).
+
+### ❌ Bad Practice
+
+```jsx
+componentDidMount() {
+    setInterval(() => {
+        console.log("Calling setInterval");
+    }, 1000);
+}
+```
+In the example above, console.log will continue to run even after navigating to a different page, because the interval remains active after the component has been unmounted.(If you are creating the mess, you should clear the mess)
+
+### ✅ Good Practice
+``` jsx
+componentDidMount() {
+    this.timer = setInterval(() => {
+        console.log("Calling setInterval");
+    }, 1000);
+}
+
+componentWillUnmount() {
+    clearInterval(this.timer);
+}
+
+// Note: We stored setInterval in a variable using this.timer. "this" is available throught the class and we can create and access any variable using this.
+```
+
+---
+
+## 9. Explanation of Component Unmounting in Functional Components
+
+Similar to class-based components, when using functional components, any intervals or subscriptions created should be cleared when the component unmounts.
+
+React is a Single Page Application (SPA), meaning components are mounted and unmounted dynamically as you navigate between pages. If intervals aren't properly cleared, they will continue to run even after the component is removed from the DOM.
+
+Below is the bad code and it will call the console even when we change to the differnt method.
+
+### ❌ Bad Practice
+
+``` jsx
+useEffect(() => {
+    setInterval(() => {
+        console.log("Calling setInterval");
+    }, 1000);
+}, []);
+```
+This code creates an interval that will continue to run indefinitely, even after the component is unmounted.
+
+### ✅ Good Practice
+
+``` jsx
+useEffect(() => {
+    const timer = setInterval(() => {
+        console.log("Calling setInterval");
+    }, 1000);
+
+    return () => {
+        clearInterval(timer);
+    };
+}, []);
+
+// Note: The return statement in useEffect is used to clean up side effects, such as intervals or subscriptions, when the component is unmounted.
 ```
