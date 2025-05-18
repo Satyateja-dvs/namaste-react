@@ -7,17 +7,17 @@ class UserClass extends React.Component {
     this.state = {
       count: 0
     }
-    console.log("Constructor called");
+    console.log("UserClass Constructor called");
   }
   componentDidMount() {
-    console.log("Component mounted");
+    console.log("UserClassComponent mounted");
   }
 
-  componentDidUpdate() {
-    console.log("Component updated");
-  }
+  // componentDidUpdate() {
+  //   console.log("Component updated");
+  // }
   render() {
-    console.log("Render method called");
+    console.log("UserClass Render method called");
     const {name, prof, functionType} = this.props;
     const {count} = this.state;
     return (
@@ -34,9 +34,17 @@ class UserClass extends React.Component {
         <br /> {functionType}
         <br />
         <CompanyProfileClass companyName={"Trika Technologies"}/>
+        <CompanyProfileClass companyName={"Google"}/>
       </div>
     )
   }
 }
 
 export default UserClass;
+
+// UserClass Constructor called
+// UserClass Render method called
+// CompanyProfileClass Constructor called
+// CompanyProfileClass Render method called
+// CompanyProfileClass Component mounted
+// UserClassComponent mounted

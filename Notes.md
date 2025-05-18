@@ -53,8 +53,8 @@ Occurs when a component is removed from the DOM.
 ### Error Handling
 - `componentDidCatch()`: Called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component. Used for logging errors and displaying fallback UI.
 
-### React Lifecycle Diagram
-![alt text](images/react-lifecycle-diagram.png)
+## 6. React Lifecycle Diagram
+![alt text](assets/images/react-lifecycle-diagram.png)
 
 ### Render Phase vs Commit Phase
 
@@ -69,3 +69,62 @@ Occurs when a component is removed from the DOM.
 - Side effects are allowed here.
 - Methods called: `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, and `getSnapshotBeforeUpdate`.
 - This phase cannot be interrupted.
+
+## 7. Code Example
+
+```jsx
+import React from "react";
+
+class User extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log("User Constructor Method Called");
+    }
+
+    componentDidMount() {
+        console.log("User componentDidMount is Called");
+        // 1. This method is used to call APIs.
+        // 2. Once the data is received from the API, update the content using this.setState.
+        // 3. This triggers a re-render of the component with the new data.
+        // 4. Then, componentDidUpdate is called.
+    }
+
+    componentDidUpdate() {
+        console.log("User componentDidUpdate is Called");
+    }
+
+    componentWillUnmount() {
+        // This will be called when we navigate away and the component is removed from the DOM.
+        console.log("User componentWillUnmount is Called");
+    }
+
+    render() {
+        console.log("User Render Method Called");
+
+        return (
+            <div>
+                Name: Satya Teja DVS
+            </div>
+        );
+    }
+}
+```
+
+### Output in Developer Console Screen
+When the component mounts:
+```
+User Constructor Method Called
+User Render Method Called
+User componentDidMount is Called
+```
+
+If the state or props update:
+```
+User Render Method Called
+User componentDidUpdate is Called
+```
+
+When the component unmounts:
+```
+User componentWillUnmount is Called
+```
