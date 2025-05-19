@@ -1,23 +1,13 @@
 import {useParams} from "react-router"
-import {useEffect, useState} from "react"
-import React from 'react';
 import Shimmer from "./Shimmer";
-import {RESTRO_DETAIL_PAGE_URL} from "../utils/constants"
+import useRestroData from "../utils/useRestroData";
 
 const RestroDetailPage = () => {
   const {id} = useParams();
-  const [restroData, setRestroData] = useState(null);
 
-  useEffect(() => {
-    getRetroDetail();
-  }, [])
-  
-  async function getRetroDetail() {
-    const data = await fetch(`${RESTRO_DETAIL_PAGE_URL}&restaurantId=${id}`)
-    const response = await data.json();
-    setRestroData(response.data)
-  }
-  
+  // This is a custom hook that follows the Single Responsibility Principle (SRP)
+  const restroData = useRestroData(id);
+
   if (restroData === null) {
     return <Shimmer />
   }

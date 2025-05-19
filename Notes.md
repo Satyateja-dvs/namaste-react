@@ -164,9 +164,8 @@ componentDidMount() {
 componentWillUnmount() {
     clearInterval(this.timer);
 }
-
-// Note: We stored setInterval in a variable using this.timer. "this" is available throught the class and we can create and access any variable using this.
 ```
+> Note: We stored setInterval in a variable using this.timer. "this" is available throught the class and we can create and access any variable using this.
 
 ---
 
@@ -201,6 +200,62 @@ useEffect(() => {
         clearInterval(timer);
     };
 }, []);
+```
+> Note: The return statement in useEffect is used to clean up side effects, such as intervals or subscriptions, when the component is unmounted.
 
-// Note: The return statement in useEffect is used to clean up side effects, such as intervals or subscriptions, when the component is unmounted.
+## 10. Single Responsibility Pricinciple
+
+If we have defined the logic of fetching the restaurant data from an API inside the RestaurantMenu Component, the component is not maintaining the single resposibility princilple and the JOB of the the component is just to render the list of menus and it should worry of how to fetch the data.
+
+So, we can extract the fetching API code to the seperate logic by creating the custom hook.
+
+> ⚠️ Note: Hooks are nothing but the normal utility functions.
+
+So, lets create a custom hook and the name of the hook should start with "use" for react to understand that it is a hook. The hook is just like a normal function where we can use useState and useEffect in it.
+
+Below is the code for reference
+
+### Main Component
+
+```jsx
+import useRestroData from "../utils/useRestroData";
+
+const RestroDetailPage = () => {
+  const {id} = useParams();
+
+  // This is a custom hook that follows the Single Responsibility Principle (SRP)
+  const restroData = useRestroData(id);
+
+  if (restroData === null) {
+    return <Shimmer />
+  }
+
+  return (
+    // Return the JSX with the restroData on to the DOM
+  )
+}
+```
+### Custom Hook
+
+> File Path: src/utils/useRestroData.js
+
+```jsx
+import { useEffect, useState } from "react";
+import { RESTRO_DETAIL_PAGE_URL } from "./constants";
+
+const useRestroData = (id) => {
+  const [restroData, setRestroData] = useState(null);
+
+  useEffect(() => {
+    getRestaurantData();
+  }, [])
+
+  async function getRestaurantData() {
+    const data = await fetch(`${RESTRO_DETAIL_PAGE_URL}&restaurantId=${id}`)
+    const response = await data.json();
+    setRestroData(response.data)
+  }
+  
+  return restroData;
+}
 ```
