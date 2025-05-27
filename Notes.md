@@ -334,3 +334,6 @@ The Tailwind internally using POST CSS(which is a tool that uses JavaScript plug
 | Pros | Cons |
 |:-----|:-----|
 | You can write all your styles directly in your component, so you don’t need to switch between CSS and JS files. This can make you more productive. Tailwind is easy to learn. | If you need a lot of styles, your className can get very long and messy, which can make your code harder to read. |
+| Before all the classes will load at a time from the single CSS file and now, Our Bundler will only include the classes that are absolutely required for the component, making your website faster | |
+|Tailwind will never ship unused CSS which improves the SEO Performance||
+|Tailwind supports and has the classes for Dark and Light theme along with many other features||
