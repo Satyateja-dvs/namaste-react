@@ -16,7 +16,7 @@ const TopRestaurantCards = (props) => {
       // const resDataFinal = restroWidget?.gridElements?.infoWithStyle?.filter(item => item['@type'] === CONTENT_TYPE_ENUM.GRID_WIDGETS);
       // console.log("resDataFinal", resDataFinal);
       return (
-        <div className="restaurant-container" key={index}>
+        <div className="flex flex-wrap justify-evenly" key={index}>
           {
             restroWidget?.gridElements?.infoWithStyle?.restaurants?.map((restro) => {
               console.log("restro", restro);
@@ -32,30 +32,30 @@ const TopRestaurantCards = (props) => {
                 areaName
               } = restro.info;
               return (
-                <Link to={`/restaurants/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                  <div className="restaurant-card-container" key={id}>
-                    <div className="image-container">
-                      <img src={`${RESTRO_IMAGE_BASE_URL}/${cloudinaryImageId}`} alt="Restaurant Image" className="restro-image" />
-                      <div className="discount-overlay">
+                <Link to={`/restaurants/${id}`} className='m-4 bg-neutral-100'>
+                  <div className="flex flex-col p-4" key={id}>
+                    <div className="relative">
+                      <img src={`${RESTRO_IMAGE_BASE_URL}/${cloudinaryImageId}`} alt="Restaurant Image" className="w-80 h-auto min-h-40" />
+                      <div className="absolute top-0 left-0 bg-black text-white p-2 rounded-br-2xl">
                         <span>{aggregatedDiscountInfoV3?.header} {aggregatedDiscountInfoV3?.subHeader}</span>
                       </div>
                     </div>
-                    <div className="restro-content">
+                    <div className="flex flex-col p-2 flex-wrap">
                       <h3>{name}</h3>
-                      <div className="rating-and-sla-container">
-                        <div className="rating">
+                      <div className="flex flex-col">
+                        <div className="flex">
                           <span>
                             <img src={StarRating} alt="Star Rating" />
                           </span>
                           <span style={{ marginLeft: '4px' }}>{avgRating} ({totalRatingsString})</span>
                         </div>
-                        <div className="sla">
+                        <div className="mt-4">
                           {sla.slaString}
                         </div>
                       </div>
-                      <div className="restro-cuisines">
+                      {/* <div className="">
                         {cuisines.join(", ")}
-                      </div>
+                      </div> */}
                       <div>{areaName}</div>
                     </div>
                   </div>

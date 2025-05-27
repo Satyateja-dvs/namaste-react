@@ -7,22 +7,22 @@ import useOnlineStatus from '../utils/useOnlineStatus';
 const Header = () => {
   const isOnline = useOnlineStatus();
   return (
-    <div className="header margin-bottom">
-      <div className="logo-container">
+    <div className="flex justify-between bg-stone-100">
+      <div className="w-23">
         {/* rgb(37, 150, 190) */}
         <Link to={"/"}>
           <img className="logo" src={MyImage} alt="Food App Logo" />
 
         </Link>
       </div>
-      <div className="nav-items">
-        <nav className='nav-list'>
-          <NavLink style={{color: "black"}}> Online Status: {isOnline ? "🟢": "🔴"} </NavLink>
-          <NavLink to="/"> Home </NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/partner-with-us"> Partner With Us</NavLink>
-          <NavLink to="/careers">Careers</NavLink>
-          <NavLink to="/cart" className="cart-link">
+      <div className="">
+        <nav className='flex justify-between'>
+          <NavLink className="m-4 p-4" style={{color: "black"}}> Online Status: {isOnline ? "🟢": "🔴"} </NavLink>
+          <NavLink className="m-4 p-4" to="/"> Home </NavLink>
+          <NavLink className="m-4 p-4" to="/about">About</NavLink>
+          <NavLink className="m-4 p-4" to="/partner-with-us"> Partner With Us</NavLink>
+          <NavLink className="m-4 p-4" to="/careers">Careers</NavLink>
+          <NavLink className="m-4 p-4 flex" to="/cart">
             <img src={CartIcon} alt="Cart Icon" />
             Cart
           </NavLink>

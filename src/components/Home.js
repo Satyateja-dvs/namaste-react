@@ -61,21 +61,19 @@ const Home = () => {
   }
 
   return (
-    <div className="container margin-bottom">
-      <div className="search-box-and-results">
-        <div className="search-container margin-bottom">
-          <input type="text" placeholder="Search for your favourite food" onChange={onInputChange} />
-          <button className="search-button">Search</button>
-        </div>
-        {/* {restFilteredData?.cards?.length > 0 && 
-          <div className="search-result-container">
-            <h2>Search results</h2>
-            <TopRestaurantCards resData={restFilteredData} />
-          </div>
-        } */}
+    <div className="flex flex-col">
+      <div className="flex flex-row gap-4 m-6 ml-5">
+        <input type="text" placeholder="Search for your favourite food" onChange={onInputChange} className='w-md bg-neutral-100 p-3 rounded-md'/>
+        <button className="bg-green-600 p-3 rounded-lg pl-8 pr-8 text-white">Search</button>
       </div>
-      <div className="top-restaurants padding margin-bottom">
-        <h2>Top restaurant chains near you</h2>
+      {/* {restFilteredData?.cards?.length > 0 && 
+        <div className="search-result-container">
+          <h2>Search results</h2>
+          <TopRestaurantCards resData={restFilteredData} />
+        </div>
+      } */}
+      <div className="flex flex-col flex-wrap">
+        <h2 className='text-xl ml-5 font-semibold'>Top restaurant chains near you</h2>
         {filteredData?.cards?.length > 0 ? <TopRestaurantCards resData={restFilteredData} /> : <Shimmer />}
       </div>
     </div>

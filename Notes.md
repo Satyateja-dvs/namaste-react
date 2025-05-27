@@ -314,9 +314,23 @@ There are many CSS Libraries available. Some of them are mentioned below. They h
 3. [Chakra UI](https://chakra-ui.com/)
 4. [Ant Design](https://ant.design/)
 
+## Most Recommended and Trending Library/Framework
+🔊[Tailwind CSS](https://tailwindcss.com/)
+
 ### Criteria for Choosing CSS Frameworks
 1. Project Requirement
 2. Eases the learning process.
 3. Minimizes compatibility issues.
 4. Provides community support.
 5. Ensures scalability & long-term viability.
+
+## 13. Using Tailwind Framework
+The Tailwind internally using POST CSS(which is a tool that uses JavaScript plugins to transform CSS code). Our Parcel understands the Tailwind CSS with the help of PostCSS tool.
+
+✅ Please follow the Installation Guide to install using Parcel: https://tailwindcss.com/docs/installation/framework-guides/parcel
+
+### Pros and Cons of Tailwind
+
+| Pros | Cons |
+|:-----|:-----|
+| You can write all your styles directly in your component, so you don’t need to switch between CSS and JS files. This can make you more productive. Tailwind is easy to learn. | If you need a lot of styles, your className can get very long and messy, which can make your code harder to read. |
