@@ -259,3 +259,64 @@ const useRestroData = (id) => {
   return restroData;
 }
 ```
+
+## 11. Lazy Loading the components
+
+We've many names for this as some developers say
+ 1. Chuncking
+ 2. Code Splitting
+ 3. Lazy Loading
+
+At the end all the components are compressed in a single js file which is heavy in case of large applications. So, we can divide the js files/chunck the js files by lazy loading the components.
+
+### Normal Import
+
+```jsx
+import Career from './components/Career';
+```
+
+### Lazy Import
+
+```jsx
+const Career = lazy(() => import ('./components/Career'));
+```
+
+### File Size Before
+![alt text](assets/images/import-file-size.png)
+
+### File Size After
+![alt text](assets/images/import-file-size-after.png)
+
+### Notes and Conclusion
+
+1. Using lazy loading (code splitting) can significantly improve the performance of large applications by reducing the initial JavaScript bundle size.
+2. Even if the reduction in file size seems small (e.g., 1KB), the impact is much greater in large-scale projects with many components, leading to faster load times and a better user experience.
+3. Lazy loading ensures that only the code required for the current view is loaded, deferring the loading of other components until they are actually needed.
+4. This technique helps optimize resource usage, improves perceived performance, and is considered a best practice for scalable React applications.
+
+## Suspense
+Now that your component’s code loads on demand, you also need to specify what should be displayed while it is loading. You can do this by wrapping the lazy component or any of its parents into a <Suspense> boundary:
+
+```jsx
+<Suspense fallback={<h1>Loading....</h1>}>
+  <h2>Preview</h2>
+  <Career />
+</Suspense>
+```
+
+## 12. CSS Libraries
+
+There are many CSS Libraries available. Some of them are mentioned below. They have their own way of defining the styles. Choose on your own
+
+## Some popular CSS frameworks
+1. [Styled Components](https://styled-components.com/)
+2. [Material UI](https://mui.com/material-ui/)
+3. [Chakra UI](https://chakra-ui.com/)
+4. [Ant Design](https://ant.design/)
+
+### Criteria for Choosing CSS Frameworks
+1. Project Requirement
+2. Eases the learning process.
+3. Minimizes compatibility issues.
+4. Provides community support.
+5. Ensures scalability & long-term viability.

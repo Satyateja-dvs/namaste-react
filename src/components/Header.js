@@ -2,8 +2,10 @@ import React from 'react';
 import MyImage from '../../assets/app-logo.png';
 import CartIcon from '../../assets/cart.svg';
 import { NavLink, Link } from 'react-router';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 const Header = () => {
+  const isOnline = useOnlineStatus();
   return (
     <div className="header margin-bottom">
       <div className="logo-container">
@@ -15,6 +17,7 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <nav className='nav-list'>
+          <NavLink style={{color: "black"}}> Online Status: {isOnline ? "🟢": "🔴"} </NavLink>
           <NavLink to="/"> Home </NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/partner-with-us"> Partner With Us</NavLink>
