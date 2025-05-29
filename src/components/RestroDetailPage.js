@@ -1,6 +1,7 @@
 import {useParams} from "react-router"
 import Shimmer from "./Shimmer";
 import useRestroData from "../utils/useRestroData";
+import RestaurantItemCategory from "./RestaurantItemCategory";
 
 const RestroDetailPage = () => {
   const {id} = useParams();
@@ -19,11 +20,12 @@ const RestroDetailPage = () => {
     cuisines
   } = restroData?.cards[2]?.card?.card?.info
 
-  console.log("restroData", restroData);
+  const filterCardGroup = restroData?.cards?.filter(c => c.groupedCard)
+  const filterAccordionList = filterCardGroup[0].groupedCard.cardGroupMap?.REGULAR?.cards?.filter(c => c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
 
   return (
-    <div>
-      <h1>
+    <div className="text-center my-4">
+      <h1 className="text-3xl font-bold">
        {name}
       </h1>
       <div>
@@ -36,6 +38,8 @@ const RestroDetailPage = () => {
           </div>
         </div>
       </div>
+      {/* Item List */}
+      <RestaurantItemCategory data={filterAccordionList} />
     </div>
   )
 }

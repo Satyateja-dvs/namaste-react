@@ -12,9 +12,7 @@ const TopRestaurantCards = (props) => {
       const {
         card: restroWidget,
       } = card.card;
-      console.log("restroWidget", restroWidget);
       // const resDataFinal = restroWidget?.gridElements?.infoWithStyle?.filter(item => item['@type'] === CONTENT_TYPE_ENUM.GRID_WIDGETS);
-      // console.log("resDataFinal", resDataFinal);
       return (
         <div className="flex flex-wrap justify-evenly" key={index}>
           {

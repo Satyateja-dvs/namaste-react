@@ -337,3 +337,24 @@ The Tailwind internally using POST CSS(which is a tool that uses JavaScript plug
 | Before all the classes will load at a time from the single CSS file and now, Our Bundler will only include the classes that are absolutely required for the component, making your website faster | |
 |Tailwind will never ship unused CSS which improves the SEO Performance||
 |Tailwind supports and has the classes for Dark and Light theme along with many other features||
+
+
+## 14. Higher Order Functions
+1. The higher order functions are the functions that takes the function/component as an input and returns the enhanced component/function as an output.
+2. These higher order functions are the pure functions in which the function/component code will not be modified but it enhances the component while returning.
+3. HOC is an advanced technique in React for reusing component logic
+
+```jsx
+const withLogger = (WrappedComponent) => {
+  return (props) => {
+    console.log("Component rendered:", WrappedComponent.name);
+    return <WrappedComponent {...props} />;
+  };
+};
+
+const MyComponent = (props) => {
+  return <div>My Component</div>;
+};
+
+const EnhancedComponent = withLogger(MyComponent);
+```
