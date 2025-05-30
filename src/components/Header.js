@@ -3,9 +3,13 @@ import MyImage from '../../assets/app-logo.png';
 import CartIcon from '../../assets/cart.svg';
 import { NavLink, Link } from 'react-router';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import { useContext } from 'react';
+import UserContext from '../utils/UserContext';
 
 const Header = () => {
   const isOnline = useOnlineStatus();
+  const {loggedInUser} = useContext(UserContext);
+
   return (
     <div className="flex justify-between bg-stone-100">
       <div className="w-23">
@@ -26,6 +30,7 @@ const Header = () => {
             <img src={CartIcon} alt="Cart Icon" />
             Cart
           </NavLink>
+          <NavLink className="m-4 p-4 text-green-600" to="/contact">Hey! {loggedInUser}</NavLink>
         </nav>
       </div>
     </div>

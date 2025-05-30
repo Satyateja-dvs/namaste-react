@@ -14,12 +14,20 @@ const RestaurantDish = ({RestaurantDishCards}) => {
               <div className="font-bold text-sm">
                 ₹ {price ? price/100 : defaultPrice/100}
               </div>
-              <div className="text-gray-500 text-sm">
+              <div className="text-gray-500 text-sm break-normal">
                 {description}
               </div>
             </div>
             <div className="w-3/12 m-4">
-              <img src={`${RESTRO_IMAGE_BASE_URL}/${imageId}`} alt={name} className="" />
+              <div className="relative">
+                <img src={`${RESTRO_IMAGE_BASE_URL}/${imageId}`} alt={name} className="rounded-xl"/>
+                <div className="absolute left-0 right-0 -bottom-4">
+                  <button className="text-green-600 font-bold bg-white px-8 py-2 rounded-lg">
+                    ADD
+                  </button>
+
+                </div>
+              </div>
             </div>
           </div>
         )

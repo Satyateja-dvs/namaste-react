@@ -358,3 +358,149 @@ const MyComponent = (props) => {
 
 const EnhancedComponent = withLogger(MyComponent);
 ```
+
+## 15. Props Drilling
+
+1. React is a One Directional Data flow system, where the data will be passed from parent to its children and children to its children. This is called Props Drilling.
+2. Props drilling in React refers to the process of passing data (props) down through multiple layers of components, even if some of those components don't actually need the data.
+3. The Props Drilling from parent to children is essential if the childrens are less(one or two levels). States and Props are much needed for React. Without these React does not exist
+
+### Problem of Props Drilling
+1. Think of very big nesting, passing the data from parent to its 10th children, no other children needed the data but only the 10th children needs the data.
+2. So, we need a global level for storing the data for the 10th children to access the data. React gives that super power to access the data globally. That Super Power💥 is called "React Context"
+
+
+## 16. React Context
+1. We can avoid props drilling using React Context. Its foolish to pass the data 10 levels deep using Props Drilling and its not a good way.
+2. With the React Context, we can access the data from anywhere. Some useful/important scenarios where we need the Global Context.
+  i. Logged-in User Info in Header 
+  ii. Theme(Dark theme/Light theme) - We need to know user enabled which theme and depending on that our components can be updated to use dark theme (Ex., ```className="text-black dark:text-white"```)
+
+### 16.1 Creating & Using Context
+
+#### Creating Context
+We can create the context using createContext function available from react
+
+> File Path: src/utils/UserContext.js
+```jsx
+import { createContext } from "react"
+
+const UserContext = createContext({
+  loggedInUser: "Dummy"
+})
+
+export default UserContext;
+```
+
+#### Using Context in Functional Component
+We can use the context using useContext from react which is a standard way now.
+
+```jsx
+import {useContext} from "react";
+import UserContext from "./UserContext";
+
+const {loggedInUser} = useContext(UserContext)
+```
+
+#### Using Context in Class Based Component
+
+```jsx
+import UserContext from ".UserContext";
+
+class AboutClass extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <UserContext.Consumer>
+        {({loggedInUser}) => console.log(loggedInUser)}
+      </UserContext.Consumer>
+    )
+  }
+}
+```
+
+### 16.2 Updating the Context
+For updating the context, we use provider available from context.
+1. Lets say, I got the data from the API, and updating the context.
+
+> File Path: src/App.js
+
+```jsx
+import UserContext from "react";
+
+const App = () => {
+  return (
+    <UserContext.Provider value={{loggedInUser: "Hello! Satya"}}>
+      <Header />
+    </UserContext.Provider>
+  )
+}
+```
+> 🔊 In the above code, the context will update only for Header Component and other parts of the component still use other ```Dummy``` value given by ```loggedInUser```
+
+We can multiple contexts for multiple components. This Context is very much performant. React takes care of all the performance.
+
+We can write multiple User Contexts aswell. There is no issue and the below is the perfectly valid code.
+
+```jsx
+import UserContext from "./UserContext";
+
+const App = () => {
+  return (
+    <UserContext.Provider value={{loggedInUser: "Hello! Satya"}}>
+      <Header />
+      
+      <UserContext.Provider value={{loggedInUser: "Hello! John"}}>
+        <Body />
+      </UserContext.Provider>
+    </UserContext.Provider>
+  )
+}
+```
+The above code is perfectly valid code. ```Hello! Satya``` will be available for Header Component and ```Hello! John``` will be available only for Body Component. 💥 This is amazing in react.
+
+🔊 We can also pass the useState updating hooks to the provider to update it anywhere. See the code below.
+
+```jsx
+import UserContext from "./UserContext";
+import { useState } from "react";
+
+const App = () => {
+  const [user, setUser] = useState();
+  return (
+    <UserContext.Provider value={{loggedInUser: "Hello! Satya", setUser}}>
+      <Header />
+      
+      <UserContext.Provider value={{loggedInUser: "Hello! John"}}>
+        <Body />
+      </UserContext.Provider>
+    </UserContext.Provider>
+  )
+}
+```
+
+> In Header Component or Any Where on the App, we can update the userName simply,
+
+```jsx
+import {useContext} from "react";
+import UserContext from "./UserContext";
+
+
+const {setUser} = useContext(UserContext);
+
+useEffect(() => {
+  setUser("Another Name")
+}, [])
+```
+💥Now wherever the user useState hook is used it will update the value there
+
+### Notes:
+1. When building small and mid level applications this context is very much helpful without using the Data Management Libraries/State Management Libraries like Redux. For small and mid is context is very much scalable.
+2. We can also build very large applcations using Context also but Redux is scalable and trending external library. Lot of people using Redux now a days.
+
+## 17. Is Redux and Context are same?
+
+Redux is the external library which is not in react. We have to do ``` npm install ``` to get into our store. Both are used the manage the state of the application but Context comes with React and Redux is the external state management library.
