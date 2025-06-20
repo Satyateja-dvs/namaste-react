@@ -8,16 +8,20 @@ import About from './components/About';
 import PartnerWithUs from './components/PartnerWithUs';
 import ErrorBoundary from './components/ErrorBoundary';
 import RestroDetailPage from './components/RestroDetailPage';
-// import Career from './components/Career';
+import {Provider} from "react-redux"
+import appStore from './utils/appStore';
+import Cart from './components/Cart';
 
 const Career = lazy(() => import ('./components/Career'));
 
 const AppLayout = () => {
   return (
-    <div className="app-container">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div className="app-container">
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   )
 }
 
@@ -35,6 +39,7 @@ const browserRouter = (
         /> 
         <Route path="/partner-with-us" element={<PartnerWithUs />} errorElement= {<ErrorBoundary />} />
         <Route path="/restaurants/:id" element={<RestroDetailPage />} errorElement= {<ErrorBoundary />} />
+        <Route path="/cart" element={<Cart />} errorElement= {<ErrorBoundary />} />
       </Route>
     </Routes>
   </BrowserRouter>

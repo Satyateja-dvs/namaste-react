@@ -26,9 +26,7 @@ const Home = () => {
       // loop through card?.card? and then gridElements and then infoWithStyle has type CONTENT_TYPE_ENUM.GRID_WIDGETS
       // then filter the restaurants based on the input data
       const finalFilterData = restFilteredData?.cards?.map(card => {
-        console.log("card?.card?.gridElements?.infoWithStyle?.restaurants", card?.card?.gridElements?.infoWithStyle?.restaurants);
         return card?.card?.gridElements?.infoWithStyle?.restaurants.filter((item) => {
-          console.log("item", item);
           return item.info.name.toLowerCase().includes(inputData.toLowerCase())
         });
       });
@@ -37,7 +35,6 @@ const Home = () => {
       //   return card?.card?.gridElements?.infoWithStyle['@type'] === CONTENT_TYPE_ENUM.GRID_WIDGETS
       // });
       // const finalFilterData = restFilteredData.cards.map(card => card.card.gridElements.)
-      console.log("finalFilterData", finalFilterData);
       // const filteredData = restFilteredData?.cards?.card?.card?.gridElements?.infoWithStyle?.restaurants.filter((item) => {
       //   console.log("item", item);
       //   return item.info.name.toLowerCase().includes(inputData.toLowerCase())
@@ -46,8 +43,6 @@ const Home = () => {
       setFilteredData(filteredData);
     }
   }
-  console.log("onlineStatus111", onlineStatus);
-
 
   useEffect(() => {
     getAPIResponse();

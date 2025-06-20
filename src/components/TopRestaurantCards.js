@@ -17,7 +17,6 @@ const TopRestaurantCards = (props) => {
         <div className="flex flex-wrap justify-evenly" key={index}>
           {
             restroWidget?.gridElements?.infoWithStyle?.restaurants?.map((restro) => {
-              console.log("restro", restro);
               const {
                 id,
                 name,

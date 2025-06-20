@@ -1,6 +1,18 @@
+import { useDispatch } from "react-redux";
 import {RESTRO_IMAGE_BASE_URL} from "../utils/constants";
-const RestaurantDish = ({RestaurantDishCards}) => {
-  console.log("RestaurantDishCards", RestaurantDishCards);
+import { addItem, removeItem } from "../utils/cartSlice";
+
+const RestaurantDish = ({RestaurantDishCards, action}) => {
+  const dispatch = useDispatch(); // ✅ Correct hook usage
+
+  const handleAddToCart = (dish) => {
+    dispatch(addItem(dish)); // ✅ Use the returned dispatch function
+  }
+
+  const handleRemoveItem = (dish) => {
+    dispatch(removeItem(dish));
+  }
+
   return (
     <div> 
       {RestaurantDishCards?.map((dish) => {
@@ -22,10 +34,13 @@ const RestaurantDish = ({RestaurantDishCards}) => {
               <div className="relative">
                 <img src={`${RESTRO_IMAGE_BASE_URL}/${imageId}`} alt={name} className="rounded-xl"/>
                 <div className="absolute left-0 right-0 -bottom-4">
-                  <button className="text-green-600 font-bold bg-white px-8 py-2 rounded-lg">
+                  {action !== "cart" && <button className="text-green-600 font-bold bg-white px-8 py-2 rounded-lg" onClick={() => handleAddToCart(dish)}>
                     ADD
                   </button>
-
+                  }
+                  {action === "cart" && <button className="text-red-600 font-bold bg-white px-8 py-2 rounded-lg" onClick={() => handleRemoveItem(dish)}>
+                    REMOVE
+                  </button>}
                 </div>
               </div>
             </div>

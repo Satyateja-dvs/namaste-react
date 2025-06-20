@@ -2,7 +2,6 @@ import {useParams} from "react-router"
 import Shimmer from "./Shimmer";
 import useRestroData from "../utils/useRestroData";
 import RestaurantItemCategory from "./RestaurantItemCategory";
-import { useContext } from "react";
 import UserContext from "../utils/UserContext";
 
 const RestroDetailPage = () => {

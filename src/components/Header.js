@@ -4,11 +4,15 @@ import CartIcon from '../../assets/cart.svg';
 import { NavLink, Link } from 'react-router';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import { useContext } from 'react';
-import UserContext from '../utils/UserContext';
+import UserContext from "../utils/UserContext";
+import { useSelector } from 'react-redux';
+
 
 const Header = () => {
   const isOnline = useOnlineStatus();
   const {loggedInUser} = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex justify-between bg-stone-100">
@@ -26,11 +30,11 @@ const Header = () => {
           <NavLink className="m-4 p-4" to="/about">About</NavLink>
           <NavLink className="m-4 p-4" to="/partner-with-us"> Partner With Us</NavLink>
           <NavLink className="m-4 p-4" to="/careers">Careers</NavLink>
+          <NavLink className="m-4 p-4 text-green-600" to="/contact">Hey! {loggedInUser}</NavLink>
           <NavLink className="m-4 p-4 flex" to="/cart">
             <img src={CartIcon} alt="Cart Icon" />
-            Cart
+            Cart <span className='font-bold'>({cartItems.length})</span>
           </NavLink>
-          <NavLink className="m-4 p-4 text-green-600" to="/contact">Hey! {loggedInUser}</NavLink>
         </nav>
       </div>
     </div>

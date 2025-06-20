@@ -504,3 +504,224 @@ useEffect(() => {
 ## 17. Is Redux and Context are same?
 
 Redux is the external library which is not in react. We have to do ``` npm install ``` to get into our store. Both are used the manage the state of the application but Context comes with React and Redux is the external state management library.
+
+## 18. Redux (💥Redux is not mandatory and use it when it is required)
+
+> ℹ️ Redux and React are separate not the same. Redux is the seperate library which we install in React
+
+1. There is no need to use Redux when building an app. There are lot of companies use Redux starting with project without any further thought, we need to undestand whether Redux is needed or not.
+2. 🔔 Redux is not mandatory. When Building small and medium scale applications we dont have to use Redux, instead we can use context.
+3. If we are building large scale applications(lot of data transfers between the components) where data is heavily used, we need data management libraries like React.
+
+> 🔊 Zustand is another libray for state management and gaining popularity now a days and lot of companies are using it.
+
+### Why to use Redux
+
+1. When using Redux application becomes easy to debug
+2. Redux provides lot of solutions for large scale applications.
+
+### 18.1 REDUX
+1. Redux is the big Javascript object kept in a centralised area where all the components will have access to it.
+2. With Redux, we can write the data and read the data.
+3. **Is it Okay to store all the data in Redux?** - YES, its absolutely fine keeping all the data in Redux by making use of Slices to keep data seperate.
+4. Example for Slice - If we want to store cart data in redux, then we will create seperate slice for cart slice. Similarly, for login/user we can create a login/user slice.
+
+#### Cart Slice - Adding the Cart Item to Cart Slice in Redux (Dispatch Action - Writing data to Redux)
+5. What Redux says is "you cannot directly add the cart item to cart slice in Redux". When we click on the cart add button it dispatches an action. After the dispatch action, it calls a function and this function modifies the cart.
+  - And that function is known as the **"Reducer"**
+6. In simple, when we click on the Add button of any item, which dispatches an **Action** which calls the Reducer function to modify the cart slice of "Redux" store 
+
+#### Reading data from Redux
+7. For reading the data, we use something known as **Selector**, and the selector will update the react component to read the data wherever we want.
+8. > NOTE: So, lets say the header component have the cart item which has cart count, so it is reading the data from the Redux by selector. The Selector in other words called **Subscribing**. So, the cart count is Subscribed to the Redux Store.
+9. Subscribe in the sense, it is in sync with Redux store. If item is added to the Redux store, the cart count updates immediately and it is in sync with the store by subscribing.
+10. How do we subscribe is using the **Selector**
+
+
+#### 18.2 Installing Redux
+To install redux we need to have two libraries installed
+1. **react-redux**: This will help components to read the data from the redux store and dispatches the actions to the redux store to update the state.
+  ``npm install react-redux``
+
+```jsx
+import {Provider} from "react-redux"
+import {appStore} from './utils/appStore';
+
+
+<Provider store={appStore}>
+  // Component logic goes here...
+</Provider>
+```
+
+2. **@reduxjs/toolkit**: This will help to build the Redux store and save the application data
+  ``npm install @reduxjs/toolkit``
+
+```jsx
+import {configureStore} from "@reduxjs/toolkit"
+
+const appStore = configureStore({
+
+})
+
+export default appStore
+```
+
+3. To Build the Cart Slice
+- Each Slice use the reducer and export the actions and reduer
+
+```jsx
+import {createSlice} from "@reduxjs/toolkit"
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    items: []
+  },
+  reducers: {
+    //actions
+    addItem: (state, action) => {
+      state.items.push(action.paylod);
+    }
+    removeItem: (state, action) => {
+      state.items = state.items.filter(item => item.id !== action.payload.id);
+    },
+    clearCart: (state) => {
+      state.items = []
+    }
+    // actions are addItem, removeItem, clearCart
+  }
+})
+
+const {addItem, removeItem, clearCart} = cartSlice.actions;
+export default cartSlice.reducer;
+```
+
+3. Use the slice/import the slice into the main store reducer.
+ 
+- The cartSlice needs to be merged to the reducer of main store 
+
+```jsx
+import {configureStore} from "@reduxjs/toolkit"
+import cartReducer from "./cartSlice"
+
+const appStore = configureStore({
+  reducer: {
+    cart: cartReducer,
+    // Similarly all the other slices will be imported here...
+  }
+})
+
+export default appStore;
+```
+
+#### 18.3 For reading the data: 
+ - Use the ***useSelector()*** provide by react-redux to the data from the slices
+
+```jsx
+import {useSelector} from "react-redux"
+
+// we are actually subscribing to the store by useSelector() hook
+const cartItems = useSelector((store) => store.cart.items)
+
+console.log(cartItems.count)
+```
+#### 18.4 For adding the item to the cart:
+ - Use ***useDispatch()*** for adding the items to cart and updating the redux store accordingly
+
+```jsx
+import {useDispatch} from "react-redux"
+import { addItem } from "../utils/cartSlice";
+
+const handleAddItem = () => {
+  // call an action
+  useDispatch(addItem("pizza"))
+  // here action.payload is "pizza" which will add to the state.items array
+}
+```
+#### 18.5 For removing the item from the cart:
+ - Use ***useDispatch()*** for removing the item from the cart and updating the redux store accordingly
+
+```jsx
+import {useDispatch} from "react-redux"
+import { removeItem } from "../utils/cartSlice";
+
+const handleAddItem = () => {
+  // call an action
+  useDispatch(removeItem("pizza"))
+  // here action.payload is "pizza" which will add to the state.items array
+}
+```
+#### 18.6 For clearing all cart items:
+ - Use ***useDispatch()*** for removing the item from the cart and updating the redux store accordingly
+
+```jsx
+import {useDispatch} from "react-redux"
+import { clearCart } from "../utils/cartSlice";
+
+const handleAddItem = () => {
+  // call an action
+  useDispatch(clearCart())
+  // here action.payload is "pizza" which will add to the state.items array
+}
+```
+
+> NOTES: 
+> Subscribing to the right store is very important otherwise it will be a performance loss if we get access to all the stores in the react component.
+
+✅ Good Practice
+```jsx
+  import {useSelector} from "react-redux"
+
+  const cartItems = useSelector((store) => store.cart.items)
+```
+
+❌ Bad Practice
+```jsx
+  import {useSelector} from "react-redux"
+
+  const store = useSelector((store) => store) // Here we unnecessarly fetching all the store information, the store will have multiple slices which will reduce the performance. Its foolish to subscribe to all the store information and our component will get affected by any updates made to the store by different slices
+  const cartItems = store.cart.items
+
+```
+
+#### 18.7 With Vinnela(Older) Redux we shouldn't mutate the state
+
+```jsx
+import {createSlice} from "@reduxjs/toolkit"
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    items: []
+  },
+  reducers: {
+    //actions
+    addItem: (state, action) => {
+      // With Vinnela (Older) Redux => DON'T MUTATE STATE
+      // const newState = [...state]
+      // newState.items.push(action.payload)
+      // return newState
+
+      // With REDUX ToolKit
+      // We have to mutate the state
+      state.items.push(action.paylod);
+    }
+    removeItem: (state, action) => {
+      state.items = state.items.filter(item => item.id !== action.payload.id);
+    },
+    clearCart: (state) => {
+      state.items = []
+    }
+    // actions are addItem, removeItem, clearCart
+  }
+})
+```
+> ## Important Notes 🔊
+> 1. With Redux **WE HAVE TO MUTATE THE STATE**, in background react does something like vennila redux does(as mentioned in the above code comment). 
+> 2. Redux uses [immer library](https://immerjs.github.io/immer/) internally to simplify state management. This means you can write code that looks like you're directly modifying the state(ex., state.items.push() Here state is directly modifying), but Immer ensures that the changes are applied in a safe and immutable way
+> 3. Install [Redux DevTools](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) for powerful debugging. It will show all the logs whenever we dispatch any events. It helps if any dispatch is unnecessarly triggering and many more.
+> 4. Earlier for saving the API response we use Redux thunk and middlewares and now, we have **RTK Query** a data fetching and caching too
+
+#### 18.8 RTK Query
+ - [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) is a powerful data fetching and caching tool. It is designed to simplify common cases for loading data in a web application, eliminating the need to hand-write data fetching & caching logic yourself.
+
